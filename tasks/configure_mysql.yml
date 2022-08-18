@@ -1,8 +1,10 @@
 - name: Find mysql socket
-  shell: 'set -o pipefail && pgrep -xa mysqld | sed -r "s/.+--socket=([^ ]+).+/\1/"'
+  shell: 'set -o pipefail && pgrep -xa "(mysql|mariadbd)" | sed -r "s/.+--socket=([^ ]+).+/\1/"'
   register: mysql_socket
   changed_when: false
   when: pmm2_client_mysql_login_host == 'localhost'
+  args:
+    executable: /bin/bash
 
 - name: Determine mysql version
   community.mysql.mysql_query:
