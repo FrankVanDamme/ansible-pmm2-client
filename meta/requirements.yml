@@ -1,4 +1,0 @@
----
-    - name: community.mysql.mysql_query
-    - name: community.mysql.mysql_user
-    - name: community.mysql.mysql_variables
