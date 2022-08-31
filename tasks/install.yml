@@ -1,6 +1,6 @@
 ---
 - name: Ensure that Percona Release RedHat package repository is present
-  yum:
+  dnf:
     name: "https://repo.percona.com/yum/percona-release-latest.noarch.rpm"
     state: present
     disable_gpg_check: yes
@@ -18,7 +18,7 @@
     state: present
 
 - name: Ensure python2-PyMySQL package installed
-  yum:
+  dnf:
     name: python2-PyMySQL
     state: present
   when: "ansible_os_family == 'RedHat'"
