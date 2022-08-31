@@ -14,12 +14,19 @@
     state: present
   when: "ansible_os_family == 'Debian'"
 
-- name: Ensure that pmm2-client installed
+- name: Ensure that pmm2-client installed - non-Redhat
+  package:
+    name: pmm2-client
+    state: present
+  when: "ansible_os_family != 'RedHat'"
+
+- name: Ensure that pmm2-client installed - Redhat
   package:
     name: pmm2-client
     state: present
   vars:
-    ansible_python_interpreter: "{{ '/usr/bin/python' if ansible_os_family == 'RedHat' }}"
+    ansible_python_interpreter: /usr/bin/python
+  when: "ansible_os_family == 'RedHat'"
 
 - name: Ensure python2-PyMySQL package installed
   yum:
