@@ -18,6 +18,8 @@
   package:
     name: pmm2-client
     state: present
+  vars:
+    ansible_python_interpreter: "{{ /usr/bin/python if ansible_os_family == 'RedHat' }}"
 
 - name: Ensure python2-PyMySQL package installed
   yum:
