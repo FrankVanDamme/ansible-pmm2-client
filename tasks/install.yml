@@ -7,12 +7,16 @@
   when: "ansible_os_family == 'RedHat'"
   vars:
     ansible_python_interpreter: /usr/bin/python
+  environment:
+    https_proxy: "{% if http_proxy is defined %}{{http_proxy}} {%- endif %}"
 
 - name: Ensure that Percona Release Debian package repository is present
   apt:
     deb: "https://repo.percona.com/apt/percona-release_latest.generic_all.deb" 
     state: present
   when: "ansible_os_family == 'Debian'"
+  environment:
+    https_proxy: "{% if http_proxy is defined %}{{http_proxy}} {%- endif %}"
 
 - name: Ensure that pmm2-client installed - non-Redhat
   package:
